@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% block css_files %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+
+    {% endblock %}
+
+</head>
+<style>
+    .text-white, .col-12{
+        text-decoration:none;
+    }
+
+    .btn btn-dark btn-sm btn-block m-1 text-white{
+        margin-left: 10px;
+    }
+</style>
+
+
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12"> 
+                <!--Navbar -->
+                <nav class="mb-1 navbar navbar-expand-lg navbar-light bg-white">
+                    <a class="navbar-brand" href="#">Pinterest</a>
+                    <button type="button" class="btn btn-dark home_button"><a class='text-white' href="{% url 'gallery' %}">Home</a></button>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+                    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <form class="form-inline my-2 my-lg-0 ml-auto" method='POST' action='{%url 'search'%}'>
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='searched'>
+                        <button class="btn btn-outline-dark btn-sm" type="submit">Search</button>
+                    </form>
+                    {% block a_unique_name %} 
+                    <section class="nav-item dropdown .text-dark">
+                        <a class="nav-link dropdown-toggle text-decoration-none " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu text-monospace" aria-labelledby="navbarDropdown">
+                            <ul class="list-group list-group-flush">
+                                {% for category in categories %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'gallery'%}?category={{category.name}}">{{category.name}}</a>
+                                </li>
+                                {% endfor %}
+                                
+                                
+                                <a href="{% url 'add' %}" class='btn btn-dark text-white'>Add Photo</a>
+                            </ul>
+                        </div>
+                    </section>
+                    {% endblock %}
+                </nav>
+            </div>
+    <!--/.Navbar -->
+        </div>
+    </div>
+
+    {% comment %} 
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fab fa-facebook-f"></i> Search
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        {% block a_unique_name %}       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"></i> Categories </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                                <ul class="list-group list-group-flush">
+                                    {% for category in categories %}
+                                    <li class="list-group-item">
+                                        <a href="{% url 'gallery'%}?category={{category.name}}">{{category.name}}</a>
+                                    </li>
+                                    {% endfor %}
+                                    
+                                    
+                                    <a href="{% url 'add' %}" class='btn btn-dark text-white'>Add Photo</a>
+                                </ul>
+                            </div>
+                        </li>
+                        {% endblock %}
+                    </ul>
+                </div>
+            </nav>
+            <!--/.Navbar -->
+        </div>
+    </div>
+
+{% endcomment %}
+
+
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Pinterest</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+
+          </ul>
+
+          
+          <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-dark btn-sm" type="submit">Search</button>
+            </form>
+            <section class="nav-item dropdown .text-dark">
+                <a class="nav-link dropdown-toggle text-decoration-none " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu text-monospace" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item text-monospace" href="#">Action</a>
+                  <a class="dropdown-item text-monospace" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </section>
+        </div>
+      </nav> {% endcomment %}
+
+
+
+
+    {% block content %}
+    
+    {% endblock content %}
+    
+</body>
+</html>

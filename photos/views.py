@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Category,Photo
+from django.utils.datastructures import MultiValueDictKeyError
 # Create your views here.
 def gallery(request):
     category=request.GET.get('category')
@@ -47,3 +48,15 @@ def singlePostView(request, pic_id = None):
     'pic':pic,
     }
     return render(request,"gallery.html", context)
+
+
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        # result = Category.objects.filter(name__contains=searched)
+        result_two = Photo.objects.filter(category__name=searched)
+        return render(request,"photos/search.html",{'searched':searched, 'result_two':result_two})
+       
+    else:
+        return render(request,"photos/search.html",{})
