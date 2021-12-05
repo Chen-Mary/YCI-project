@@ -14,18 +14,25 @@
     {% endblock %}
 
 {% block content %} 
-<center>
+<div class="container">
     {% if searched %}
         <h1>Search results for {{searched}}</h1><br>
+    <div class="row">
+       {% if result_two %}
         {% for x in result_two %}
-            <img src={{x.image.url}}>
-            <br>
+        <div class="col-md-3" style='position:relative;margin:6px 0;'>
+            <img class='' style='width:100%;height:400px;object-fit:cover;display:flex;flex-wrap:wrap;gap:20px;border-radius:8px;' src={{x.image.url}}>
+        </div>
         {% endfor %}
+        {% else %}
+        <h4>This result is not available now but you can add one <a href="/add">here.</a></h4>
+       {% endif %}
+    </div>
     {% else %}
         <h1>Hmm...Something's wrong</h1>
     {% endif %}
     
     
-</center>
+</div>
 
 {% endblock content %}

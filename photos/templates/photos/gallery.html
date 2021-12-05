@@ -1,6 +1,6 @@
 {% extends 'photos/nav.html' %}
 {% load static %}
-<title>{% block title %}Interest | Homepage{% endblock title %}</title>
+<title>{% block title %}Pinterest | Homepage{% endblock title %}</title>
 {% block css_files %}
     
     
@@ -20,9 +20,12 @@
             position: fixed;
             bottom:30px;
             right:1rem;
-            border-radius:50%;
-            text-align:left;
-            font-size:40px;
+            text-align:center;
+            width:70px;
+            height:70px;
+        }
+        .add_button a{
+            font-size:34px;
         }
         .container a{
             text-decoration:none;
@@ -30,19 +33,20 @@
         .home_button{
             border-radius:60px;
         }
-        .image-container img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            max-width: 100%;
-            min-height: 100%;  
-            border-radius: 10px;
+
+        .image-container{
+            position:relative;
+            margin:6px 0;
+
         }
         .img-fluid{
-            width:300px;
-            height:200px;
+            width:100%;
+            height:400px;
             object-fit:cover;
-            border-radius:7px
+            border-radius:7px;
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
         }
         .down-btn{
             display:inline-block;
@@ -54,15 +58,10 @@
         .down-btn svg{
             color:white;
         }
-        .column {
-            flex: 20%;
-            padding: 0 4px;
+        .card{
+            background:none;
         }
-        
-        .column img {
-            margin-top: 8px;
-            vertical-align: middle;
-        }
+     
     </style>
 </head>
 <body>
@@ -70,7 +69,7 @@
     <div class="col-12">
         <section class= 'row image-grid'>
             {% for photo in photos %}
-                    <div class="image-container col-md-3 my-3 col-sm-6">
+                    <div class="image-container col-md-3 col-sm-6 col-xs-12">
                         <div class="card">
                             <a href="{% url 'photo' photo.id %}"><img class='img-fluid' src="{{photo.image.url}}" alt="Photos"></a>
                             <a class='down-btn' href="{{photo.image.url}}" download>
@@ -85,15 +84,17 @@
                     <h3>No photos yet...</h3>
             {% endfor %}
         </section>
-            <a class='btn btn-white add_button text-dark' href="{% url 'add' %}">+</a>
+        <div class="add_button btn btn-white rounded-circle ">
+                <a class='text-dark' href="{% url 'add' %}">+</a>
+        </div>
     </div>
-
+{% comment %} 
 </script>
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 <!-- Plugin file -->
-<script src="{% static './js/addons/datatables.min.js' %}"></script>
+<script src="{% static './js/addons/datatables.min.js' %}"></script> {% endcomment %}
 </body>
 {% endblock content %}
