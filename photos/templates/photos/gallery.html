@@ -40,11 +40,25 @@
             right:2%;
             bottom:3%;
         }
-        .column {
-            flex: 25%;
-            padding: 0 4px;
+
+        .img-fluid{
+            object-fit:cover;
+            border-radius:7px;
+            width: 280px;
+            height:200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-left: 15px;
+            
         }
+
+        .column {
+            justify-content: space-between;
+            padding: 0 4px;
+        } 
         
+
         .column img {
             margin-top: 8px;
             vertical-align: middle;
